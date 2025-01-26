@@ -5,20 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory Card Game</title>
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
-    <h1 style="color:red">Memory Card Game</h1>
-    
+    <h1>Memory Card Game</h1>
     <div id="controls">
         <button class="difficulty-button" onclick="initializeGame('easy')">Easy</button>
         <button class="difficulty-button" onclick="initializeGame('medium')">Medium</button>
-        <button class="difficulty-button"onclick="initializeGame('hard')">Hard</button>
-        <p id="timer" style="color:brown">Time: 0 seconds</p>
-        <p id="attempts" style="color:brown">Attempts: 0</p>
+        <button class="difficulty-button" onclick="initializeGame('hard')">Hard</button>
+        <p id="timer">Time: 0 seconds</p>
+        <p id="attempts">Attempts: 0</p>
+        <p id="score">Score: 0</p>
     </div>
-
     <div id="game-board"></div>
-
-    <script src="script.js"></script> 
+    <script src="script.js">
+        
+    </script>
 </body>
 </html>

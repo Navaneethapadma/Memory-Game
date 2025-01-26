@@ -1,12 +1,13 @@
 let flippedCards = [];
         let attempts = 0;
+        let score = 0;
         let timer;
         let seconds = 0;
 
         const levels = {
-            easy: 8,  
-            medium: 12, 
-            hard: 16  
+            easy: 8,
+            medium: 12,
+            hard: 16
         };
 
         const cardData = [
@@ -23,11 +24,11 @@ let flippedCards = [];
         function initializeGame(level) {
             const numberOfCards = levels[level];
             const gameBoard = document.getElementById('game-board');
-            gameBoard.innerHTML = '';  
+            gameBoard.innerHTML = '';
             resetGame();
 
             let selectedCards = cardData.slice(0, numberOfCards / 2);
-            selectedCards = [...selectedCards, ...selectedCards]; 
+            selectedCards = [...selectedCards, ...selectedCards];
             selectedCards.sort(() => 0.5 - Math.random());
 
             selectedCards.forEach(card => {
@@ -45,7 +46,7 @@ let flippedCards = [];
             });
 
             const cols = Math.min(numberOfCards, 4);
-            gameBoard.style.gridTemplateColumns = `repeat(${cols}, 100px)`; 
+            gameBoard.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
 
             startTimer();
         }
@@ -56,13 +57,15 @@ let flippedCards = [];
                 flippedCards.push(this);
 
                 if (flippedCards.length === 2) {
-                    attempts++; 
-                    updateScore(); 
+                    attempts++;
+                    updateScore();
 
                     if (flippedCards[0].dataset.name === flippedCards[1].dataset.name) {
                         flippedCards.forEach(card => card.classList.add('matched'));
-                        flippedCards = []; 
-                        checkWin(); 
+                        flippedCards = [];
+                        score += 10;
+                        updateScore();
+                        checkWin();
                     } else {
                         setTimeout(() => {
                             flippedCards.forEach(card => card.classList.remove('flip'));
@@ -75,6 +78,7 @@ let flippedCards = [];
 
         function updateScore() {
             document.getElementById('attempts').textContent = `Attempts: ${attempts}`;
+            document.getElementById('score').textContent = `Score: ${score}`;
         }
 
         function startTimer() {
@@ -96,9 +100,10 @@ let flippedCards = [];
         }
 
         function resetGame() {
-            attempts = 0; 
+            attempts = 0;
+            score = 0;
             flippedCards = [];
-            updateScore(); 
+            updateScore();
             resetTimer();
         }
 
@@ -108,6 +113,6 @@ let flippedCards = [];
 
             if (allFlipped === totalCards) {
                 stopTimer();
-                setTimeout(() => alert(`You won! Attempts: ${attempts}, Time: ${seconds} seconds`), 500);
+                setTimeout(() => alert(`You won! Attempts: ${attempts}, Time: ${seconds} seconds, Score: ${score}`), 500);
             }
         }
